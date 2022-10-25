@@ -8,10 +8,25 @@
   </head>
   <body>
     <input
+      id="input"
       type="text"
       placeholder="RFID Tag를 스캔해주세요"
       autofocus
       inputmode="none"
     />
+    <button type="button" id="btn">변경</button>
+    <script>
+      const focusedInput = document.getElementById("input");
+      const changeBtn = document.getElementById("btn");
+      changeBtn.addEventListener("click", () => {
+        let attr = focusedInput.getAttribute("inputmode");
+        console.log(attr);
+        if (attr === "none") {
+          focusedInput.setAttribute("inputmode", "text");
+        } else {
+          focusedInput.setAttribute("inputmode", "none");
+        }
+      });
+    </script>
   </body>
 </html>
