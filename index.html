@@ -5,6 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>test</title>
+    <style>
+      html,
+      body {
+        width: 100vw;
+        height: 100vh;
+        background-color: #fff;
+      }
+      .wrap {
+        width: 100%;
+        height: 100%;
+      }
+      :not(:root):fullscreen::backdrop {
+        background-color: #fff !important;
+      }
+    </style>
   </head>
   <body>
     <div id="wrap">
@@ -16,19 +31,27 @@
         inputmode="none"
       />
       <button type="button" id="btn">변경</button>
+      <p id="text"></p>
     </div>
     <script>
-      document.getElementById("wrap").requestFullscreen();
+      let wrapFullScreen = document.fullscreenEnabled;
+      //   console.log(wrapFullScreen);
 
       const focusedInput = document.getElementById("input");
+      const stateText = document.getElementById("text");
       const changeBtn = document.getElementById("btn");
       changeBtn.addEventListener("click", () => {
+        if (wrapFullScreen) {
+          document.getElementById("wrap").requestFullscreen();
+        }
         let attr = focusedInput.getAttribute("inputmode");
         console.log(attr);
         if (attr === "none") {
           focusedInput.setAttribute("inputmode", "text");
+          stateText.innerText = attr;
         } else {
           focusedInput.setAttribute("inputmode", "none");
+          stateText.innerText = attr;
         }
       });
     </script>
